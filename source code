@@ -1,0 +1,153 @@
+#include <stdlib.h>
+#include <stdio.h>
+#define MAX 10
+#define INFINITY 9999
+int cost[MAX][MAX], dist[MAX], pred[MAX];
+int visited[MAX], count, mindistance, next, i, j;
+int src, des, temp, choice;
+int n = 8;
+int src, des, temp, choice;
+int nodes[MAX][MAX] = {{0, 47, 0, 95, 0, 0, 0, 0},
+					   {47, 0, 61, 0, 0, 0, 0, 0},
+					   {0, 61, 0, 39, 0, 0, 67, 0},
+					   {95, 0, 0, 0, 0, 66, 92, 0},
+					   {0, 0, 0, 0, 0, 0, 36, 87},
+					   {0, 0, 0, 66, 0, 0, 0, 150},
+					   {0, 0, 67, 0, 36, 0, 0, 0},
+					   {0, 0, 0, 0, 87, 150, 0, 0}};
+char cities[8][30] = {"Alwar", "Jamshedpur", "Patna", "Bengaluru", "Nalanda", "Tumkur", "Jaipur", "Delhi"};
+
+
+void djisktra(int source, int des)
+{
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (nodes[i][j] == 0)
+			{
+				cost[i][j] = INFINITY;
+			}
+			else
+			{
+				cost[i][j] = nodes[i][j];
+			}
+		}
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		dist[i] = cost[source][i];
+		pred[i] = source;
+		visited[i] = 0;
+	}
+
+	dist[source] = 0;
+	visited[source] = 1;
+	count = 1;
+
+	while (count < n - 1)
+	{
+		mindistance = INFINITY;
+		for (i = 0; i < n; i++)
+		{
+			if (dist[i] < mindistance && !visited[i])
+			{
+				mindistance = dist[i];
+				next = i;
+			}
+		}
+		visited[next] = 1;
+
+		for (i = 0; i < n; i++)
+		{
+			if (!visited[i])
+			{
+				if (mindistance + cost[next][i] < dist[i])
+				{
+					dist[i] = mindistance + cost[next][i];
+					pred[i] = next;
+				}
+			}
+		}
+		count++;
+	}
+}
+void src_dest()
+{
+	printf("\n***********\nEnter Source city:\n1.Alwar\n2.Jamshedpur\n3.Patna\n4.Bengaluru\n5.Nalanda\n6.Tumkur\n7.Jaipur\n8.Delhi\n");
+	scanf("%d", &src);
+	printf("\n***********\nEnter Destination city:\n1.Alwar\n2.Jamshedpur\n3.Patna\n4.Bengaluru\n5.Nalanda\n6.Tumkur\n7.Jaipur\n8.Delhi\n");
+	scanf("%d", &des);
+
+	if (src == des)
+	{
+		printf("Source and Destination cannot be same, please try again\n");
+		return;
+	}
+
+	if (src > des)
+	{
+		temp = src;
+		src = des;
+		des = temp;
+	}
+
+	djisktra(src - 1, des - 1);
+}
+void display(int source, int dest)
+{
+
+	printf("\n***************\n");
+	printf("\nDistance of other cities from %s\n***************\n", cities[source]);
+	for (i = 0; i < n; i++)
+
+	{
+		if (i != source)
+		{
+			printf("\nDistance of %s is %d", cities[i], dist[i]);
+			printf("\nPath : %s", cities[i]);
+			j = i;
+
+			do
+			{
+				j = pred[j];
+				printf("<-%s", cities[j]);
+			} while (j != source);
+			printf("\n\n***************\n\n");
+		}
+	}
+}
+void nearby()
+{
+	printf("\n***********\nEnter Source city:\n1.Alwar\n2.Jamshedpur\n3.Patna\n4.Bengaluru\n5.Nalanda\n6.Tumkur\n7.Jaipur\n8.Delhi\n");
+	scanf("%d", &src);
+	djisktra(src - 1, 0);
+	display(src - 1, 0);
+}
+int main()
+{
+	while (1)
+	{
+		printf("\n*************\nWelcome to SSST Mapping System\n");
+		printf("\n1.Find Best Route Between Two Cities\n2.Nearby Places to visit\n3.Exit");
+		printf("\nEnter your choice:");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 1:
+			src_dest();
+			printf("distance of %s to %s or %s to %s is %d km\n\n***************\n\n", cities[src - 1], cities[des - 1], cities[des - 1], cities[src - 1], dist[des - 1]);
+
+			break;
+		case 2:
+			nearby();
+			break;
+		case 3:
+			exit(0);
+		default:
+			printf("\nInvalid Input");
+		}
+	}
+	return 0;
+}
