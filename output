@@ -1,0 +1,83 @@
+***********
+Welcome to SSST Mapping System   
+
+1.Find Best Route Between Two Cities
+2.Nearby Places to visit
+3.Exit
+Enter your choice:1
+
+***********
+Enter Source city:
+1.Alwar
+2.Jamshedpur
+3.Patna
+4.Bengaluru
+5.Nalanda
+6.Tumkur
+7.Jaipur
+8.Delhi
+1
+
+***********
+Enter Destination city:
+1.Alwar
+2.Jamshedpur
+3.Patna
+4.Bengaluru
+5.Nalanda
+6.Tumkur
+7.Jaipur
+8.Delhi
+5
+distance of Alwar to Nalanda or Nalanda to Alwar is 211 km
+
+*************
+
+
+***********
+Welcome to SSST Mapping System
+
+1.Find Best Route Between Two Cities
+2.Nearby Places to visit
+3.Exit
+Enter your choice:2
+
+***********
+Enter Source city:
+1.Alwar
+2.Jamshedpur
+3.Patna
+4.Bengaluru
+5.Nalanda
+6.Tumkur
+7.Jaipur
+8.Delhi
+5
+
+***************
+
+Distance of other cities from Nalanda
+***************
+
+Distance of Alwar is 211
+Path : Alwar<-Jamshedpur<-Patna<-Jaipur<-Nalanda
+
+***************
+
+
+Distance of Jamshedpur is 164
+Path : Jamshedpur<-Patna<-Jaipur<-Nalanda
+
+***************
+
+
+Distance of Patna is 103
+Path : Patna<-Jaipur<-Nalanda
+
+***************
+
+
+Distance of Bengaluru is 142
+Path : Bengaluru<-Patna<-Jaipur<-Nalanda
+
+***************
